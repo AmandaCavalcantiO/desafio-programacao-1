@@ -1,0 +1,19 @@
+
+default: &default
+  username: postgres
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: desafio-programacao-1_development
+
+
+test:
+  <<: *default
+  database: desafio-programacao-1_test
+
+production:
+  <<: *default
+  database: desafio-programacao-1_production

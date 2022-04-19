@@ -1,0 +1,43 @@
+.container#input_orders
+  = form_for :upload, url: purchase_orders_import_path, method: 'post' do |f|
+    = f.label "Importar arquivo", class:'form-control', style:'text-align: center;'
+    = f.file_field :file, class:'form-control', required: true
+    = f.submit "Importar", class:'form-control btn-dark'
+br
+.container#purchase_orders
+  h1 style="text-align: center;"
+    |Purchase Orders
+  br
+  table.table.table-hover
+    thead
+      tr
+        th scope="col" Purchaser name
+        th scope="col" Item description
+        th scope="col" Item price
+        th scope="col" Purchase count
+        th scope="col" Merchant address
+        th scope="col" Merchant name
+    tbody
+      - @purchase_orders.each do |order|
+        tr
+          td
+            = order.purchaser_name
+          td
+            = order.item_description
+          td
+            = order.item_price
+          td
+            = order.purchase_count
+          td
+            = order.merchant_address
+          td
+            = order.merchant_name
+          td
+            =link_to 'delete', order, method: :delete, data: {confirm: 'Are you sure?'}, class:"btn btn-danger btn-sm"
+    tfoot
+      tr
+        td
+          |Total
+        td
+          = @total
+        td colspan ="5"
